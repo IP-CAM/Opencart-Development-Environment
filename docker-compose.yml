@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+  opencart:
+    build: .
+    ports: [ "8000:80" ]
+    depends_on: [ db ]
+    restart: always
+    environment:
+      OPENCART_HTTP_SERVER: http://localhost:8000/
+      OPENCART_DB_HOSTNAME: db
+      OPENCART_DB_USERNAME: root
+      OPENCART_DB_PASSWORD: opencart
+      OPENCART_DB_DATABASE: opencart
+      OPENCART_ADMIN_USERNAME: admin
+      OPENCART_ADMIN_PASSWORD: admin
+      OPENCART_ADMIN_EMAIL: admin@my.domain
+  pma:
+    image: phpmyadmin/phpmyadmin
+    ports: [ "8080:80" ]
+    depends_on: [ db ]
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: opencart
+      MYSQL_DATABASE: opencart
+    restart: always
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+volumes:
+  mysqldata: {}
