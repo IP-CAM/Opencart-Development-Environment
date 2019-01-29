@@ -7,13 +7,13 @@ services:
     restart: always
     environment:
       OPENCART_HTTP_SERVER: http://localhost:8000/
-      OPENCART_DB_HOSTNAME: db
-      OPENCART_DB_USERNAME: root
-      OPENCART_DB_PASSWORD: opencart
-      OPENCART_DB_DATABASE: opencart
-      OPENCART_ADMIN_USERNAME: admin
-      OPENCART_ADMIN_PASSWORD: admin
-      OPENCART_ADMIN_EMAIL: admin@my.domain
+      OPENCART_DB_HOSTNAME: ${OPENCART_DB_HOSTNAME-db}
+      OPENCART_DB_USERNAME: ${OPENCART_DB_USERNAME-root}
+      OPENCART_DB_PASSWORD: ${OPENCART_DB_PASSWORD-opencart}
+      OPENCART_DB_DATABASE: ${OPENCART_DB_DATABASE-opencart}
+      OPENCART_ADMIN_USERNAME: ${OPENCART_ADMIN_USERNAME-admin}
+      OPENCART_ADMIN_PASSWORD: ${OPENCART_ADMIN_PASSWORD-admin}
+      OPENCART_ADMIN_EMAIL: ${OPENCART_ADMIN_EMAIL-admin@my.domain}
   pma:
     image: phpmyadmin/phpmyadmin
     ports: [ "8080:80" ]
